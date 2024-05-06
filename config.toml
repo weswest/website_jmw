@@ -1,5 +1,5 @@
 title = "Wes West"
-baseURL = "https://example.com/"
+baseURL = "https://loquacious-cocada-a527d9.netlify.app/"
 theme = "hugo-resume"
 languageCode = "en-us"
 PygmentsCodeFences = true
