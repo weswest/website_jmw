@@ -9,4 +9,4 @@ outputs:
 - rss
 - json
 ---
-Proven Software Platform Engineer with experience leveraging agile, DevOps, and CI/CD to manage large scale distributed platforms both on prem and in public cloud.
+Chief Analytics Officer at [Nomis Solutions](https://nomissolutions.com/).  Building awesome analytics to help banks and credit unions optimize product pricing and the customer experience

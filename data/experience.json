@@ -1,19 +1,19 @@
 [
     {
-        "role":"Boss man",
-        "company":"Current Company LTD",
-        "summary":"Led in development of fast paced software teams.\n- list\n- of\n- things",
-        "range":"February 2016 - Present"
+        "role":"Chief Analytics Officer",
+        "company":"[Nomis Solutions](https://www.nomissolutions.com/)",
+        "summary":"Driving excellence in data science and analytics while developing new approaches to price and offer optimization",
+        "range":"2024-Present"
     },
     {
-        "role":"Developer",
-        "company":"Current Company LTD",
-        "summary":"Expedited the synergies of collaborative agile tooling.",
-        "range":"March 2014 - February 2016"
+        "role":"Head of Balance Sheet Management",
+        "company":"[Huntington Bank](https://www.huntington.com/)",
+        "summary":"- Managed interest rate exposure and funds transfer pricing for ~$200Bn balance sheet\n- Oversaw and grew centralized Treasury Analytics unit",
+        "range":"2019-2023"
     },
     {
-        "role":"Developer",
-        "company":"Previous Company Inc.",
+        "role":"Managing Director, Head of Financial Modeling and Deposit Pricing Practices",
+        "company":"[Novantas, now Curinos](https://www.curinos.com/)",
         "summary":"Implemented continuous devops pipelines automationing",
         "range":"February 2013 - March 2014"
     }
