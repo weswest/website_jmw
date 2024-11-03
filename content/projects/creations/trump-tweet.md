@@ -9,7 +9,6 @@
   "featured": true
 }
 
-
 This project builds a predictive model for Trump’s tweet frequency, enabling real-time betting on tweet markets. Using a dynamically refreshing ARIMAX model, the project ingests tweet data, accounts for daily/weekly patterns, and considers external events to forecast tweet volume accurately. Implemented with a near-real-time data pipeline, it supports actionable betting strategies in PredictIt’s tweet markets.
 
 <!-- Display the image in a larger format -->
