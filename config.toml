@@ -18,7 +18,7 @@ profileImage = "img/Headshot.jpg"
 showQr = false  # 20240511 When this is marked as true there's an error
 showContact = true
 #sections = ["skills","publications","creations","contributions","experience","education","blog"]
-sections = ["publications","creations","contributions","experience","education","blog"]
+sections = ["publications","creations","experience","education","blog"]
 
 
 [params.google]

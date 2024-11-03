@@ -1,20 +1,38 @@
 [
     {
-        "role":"Chief Analytics Officer",
-        "company":"[Nomis Solutions](https://www.nomissolutions.com/)",
-        "summary":"Driving excellence in data science and analytics while developing new approaches to price and offer optimization",
-        "range":"2024-Present"
+        "role": "Chief Analytics Officer",
+        "company": "[Nomis Solutions](https://www.nomissolutions.com/)",
+        "summary": "- Driving excellence in data science and analytics while developing new approaches to price and offer optimization \n- Executive sponsor of Nomis price optimization and balance sheet analysis tool \n- Functional head of strategy consulting practice",
+        "range": "2024-Present"
     },
     {
-        "role":"Head of Balance Sheet Management",
-        "company":"[Huntington Bank](https://www.huntington.com/)",
-        "summary":"- Managed interest rate exposure and funds transfer pricing for ~$200Bn balance sheet\n- Oversaw and grew centralized Treasury Analytics unit",
-        "range":"2019-2023"
+        "role": "Head of Balance Sheet Strategy",
+        "company": "[Huntington Bank](https://www.huntington.com/)",
+        "summary": "- Managed interest rate exposure and funds transfer pricing for ~$200Bn balance sheet\n- Oversaw and grew centralized Treasury Analytics unit; managed 100+ models through model governance lifecycle \n- Representative on industry term SOFR governance committee",
+        "range": "2019-2023"
     },
     {
-        "role":"Managing Director, Head of Financial Modeling and Deposit Pricing Practices",
-        "company":"[Novantas, now Curinos](https://www.curinos.com/)",
-        "summary":"Implemented continuous devops pipelines automationing",
-        "range":"February 2013 - March 2014"
+        "role": "Managing Director, Head of Financial Modeling and Deposit Pricing Practices",
+        "company": "[Novantas, now Curinos](https://www.curinos.com/)",
+        "summary": "- Established a ‘model factory’ approach to CCAR PPNR deposit forecasting; >10% US deposits forecast using this approach.\n- Managed 100+ FTE across three continents; co-head of new consultant training.",
+        "range": "2014-2019"
+    },
+    {
+        "role": "Senior Vice President - Director of CCAR Deposit Modeling",
+        "company": "[Citigroup](https://www.citigroup.com/)",
+        "summary": "- Led development of an end-to-end model management approach for stress test models covering Citi’s global balance sheet",
+        "range": "2013-2014"
+    },
+    {
+        "role": "Vice President - Consumer and Community Banking Strategy",
+        "company": "[J.P. Morgan Chase](https://www.jpmorganchase.com/)",
+        "summary": "- Developed Chase-wide customer segmentation strategy impacting ~40 million households across retail lines.\n- Identified channel migration opportunities resulting in $50M in improved customer engagement.",
+        "range": "2011-2013"
+    },
+    {
+        "role": "Head of Analytics and Pricing",
+        "company": "[First Manhattan Consulting Group](https://www.fmcgroup.com/)",
+        "summary": "- Created industry-first Consumer CD retention model using competitor market rates",
+        "range": "2006-2011, 2014"
     }
 ]
