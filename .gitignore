@@ -1,0 +1,25 @@
+# Hugo build outputs
+/public/
+/resources/_gen/
+
+# Working files - not for publication
+todo.md
+*.docx
+
+# Private meta content (transcripts with sensitive info)
+_meta/interviews/transcripts/
+
+# PDFs in root (should be moved to static/publications/)
+/*.pdf
+
+# Published PDFs are OK (these are public)
+!static/publications/*.pdf
+
+# OS files
+.DS_Store
+.hugo_build.lock
+
+# Editor files
+*.swp
+*.swo
+*~

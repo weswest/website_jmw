@@ -19,4 +19,4 @@ This page represents the landing page for "contributions" section. It is also sh
 
 
 
-<p>Sample Text Section Header!</p>
+<p>Open source contributions and collaborative projects in analytics, modeling, and financial technology.</p>

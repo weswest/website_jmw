@@ -1,32 +1,61 @@
 [
   {
-      "grouping":"Architecture",
-      "skills":[ "IP Networking","DNS","Firewalls","Load Balancing","Microservices","RESTful APIs","SaaS/PaaS/IaaS"]
-  },{
-      "grouping":"Languages, Operating Systems & Tools",
-      "skills":[ "Java","Python","git","subversion","linux","bash","php","jquery","javascript"]
+    "grouping": "Analytics & Data Science",
+    "skills": [
+      "Python",
+      "R",
+      "SQL",
+      "SAS",
+      "Machine Learning",
+      "Time Series Forecasting",
+      "Statistical Modeling",
+      "Natural Language Processing"
+    ]
   },
   {
-      "grouping":"Platform Development & Administration",
-      "skills":[ "Atlassian","Bamboo","Bitbucket","NGINX","MySQL","Wordpress"]
+    "grouping": "Banking & Financial Modeling",
+    "skills": [
+      "CCAR / DFAST Stress Testing",
+      "PPNR Forecasting",
+      "Deposit Pricing & Elasticity",
+      "Credit Risk Modeling",
+      "Asset-Liability Management (ALM)",
+      "Funds Transfer Pricing (FTP)",
+      "Interest Rate Risk",
+      "Balance Sheet Optimization"
+    ]
   },
   {
-      "grouping":"Data Management",
-      "skills":[
-        {"name":"Microsoft SQL Server","icon":"msql_server"},
-        {"name":"Oracle","icon":"database"},
-        "MongoDB",
-        {"name":"Apache Spark"}
-      ]
+    "grouping": "AI & Advanced Analytics",
+    "skills": [
+      "Large Language Models (LLMs)",
+      "Generative AI",
+      "Recommendation Systems",
+      "Model Monitoring & Governance",
+      "Feature Engineering",
+      "ARIMAX Models",
+      "Ensemble Methods"
+    ]
   },
   {
-    "grouping":"Containers & Cloud",
-      "skills":[
-          {"name":"BOSH","link":"https://bosh.io"},
-          {"name":"Docker","link":"https://docker.com"},
-          {"name":"AWS","link":"https://aws.amazon.com"},
-          {"name":"Google Cloud","link":"https://cloud.google.com"},
-          {"name":"Linux","link":"https://bosh.io"}
-      ]
+    "grouping": "Cloud & Infrastructure",
+    "skills": [
+      {"name": "AWS", "link": "https://aws.amazon.com"},
+      "Cloud Migration",
+      "Model Deployment",
+      "Data Pipelines",
+      "Agile Development"
+    ]
+  },
+  {
+    "grouping": "Leadership & Strategy",
+    "skills": [
+      "Team Building & Culture",
+      "Strategic Planning",
+      "Client Advisory",
+      "Regulatory Compliance",
+      "Model Risk Management",
+      "Executive Presentations"
+    ]
   }
 ]

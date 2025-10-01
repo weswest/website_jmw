@@ -1,0 +1,27 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
+  </ol>
+</nav>
+
+{{ define "breadcrumbnav" }}
+{{ if .p1.Parent }}
+  {{ $skip := false }}
+  {{/* Skip nomis and novantas subsections */}}
+  {{ if or (in .p1.Parent.RelPermalink "/publications/nomis/") (in .p1.Parent.RelPermalink "/publications/novantas/") }}
+    {{ $skip = true }}
+  {{ end }}
+
+  {{ if $skip }}
+    {{/* Jump straight to publications parent */}}
+    {{ template "breadcrumbnav" (dict "p1" .p1.Parent.Parent "p2" .p2) }}
+  {{ else }}
+    {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2) }}
+  {{ end }}
+{{ else if not .p1.IsHome }}
+  {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2) }}
+{{ end }}
+<li class="breadcrumb-item{{ if eq .p1 .p2 }} active{{ end }}">
+  <a href="{{ .p1.Permalink }}">{{ .p1.Title }}</a>
+</li>
+{{ end }}

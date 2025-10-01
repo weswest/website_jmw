@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:go.nomissolutions.com)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebSearch",
+      "WebFetch(domain:gohugo.io)",
+      "Bash(mkdir:*)",
+      "Bash(git mv:*)",
+      "Bash(hugo:*)",
+      "Bash(curl:*)",
+      "Bash(awk:*)",
+      "Bash(for:*)",
+      "Bash(do sed -i '' '/^featured: true$/d' \"$f\")",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -7,6 +7,11 @@ PygmentsCodeFencesGuessSyntax = true
 PygmentsStyle = "monokai"
 enableGitInfo = false
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [params]
 address = "Seattle Area, WA"
 email = "jmwest@gmail.com"
