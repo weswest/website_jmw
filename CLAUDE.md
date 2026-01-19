@@ -111,6 +111,26 @@ The site includes a working Netlify CMS integration providing a WYSIWYG editor f
 - Publications
 - Site settings (config.toml)
 
+## Project Management
+
+**Outstanding work:** https://github.com/weswest/website_jmw/issues
+
+```bash
+gh issue list                      # View all open issues
+gh issue list --label content      # Filter by label
+gh issue view <number>             # View details
+gh issue close <number>            # Close when done
+```
+
+**Long-term vision:** This site has two purposes:
+1. Professional portfolio (resume, publications, projects)
+2. Content pipeline for a management book - interview transcripts become blog posts become book chapters
+
+**Key resources in `_meta/`:**
+- `_meta/README.md` - Project overview and vision
+- `_meta/interviews/questions/` - Interview questions with Q1-Q3 already answered
+- `_meta/project-management/` - Historical session notes
+
 ## Important Notes
 
 - Hugo version in use: v0.111.3

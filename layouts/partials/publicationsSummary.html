@@ -1,5 +1,5 @@
 
-<div class="resume-item mb-3">
-  <h3 class="mb-1"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-  <div class="text-muted"><small>({{ .Date.Format "January 2006" }}){{ with .Params.description }} {{ . }}{{ end }}</small></div>
+<div class="resume-item mb-2">
+  <div><strong><a href="{{ .Permalink }}">{{ .Title }}</a></strong> <span class="text-muted">({{ .Date.Format "January 2006" }})</span></div>
+  {{ with .Params.description }}<div class="text-muted"><small>{{ . }}</small></div>{{ end }}
 </div>

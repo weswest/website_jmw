@@ -1,0 +1,70 @@
+/* CRITICAL: Remove full-viewport height from sections */
+.resume-section {
+    min-height: auto !important;
+}
+
+/* Reduce vertical spacing between sections - override Bootstrap p-3 p-lg-5 */
+.resume-section.p-3.p-lg-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+/* Even tighter on large screens */
+@media (min-width: 992px) {
+    .resume-section.p-lg-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+}
+
+/* Tighter paragraph spacing in About section */
+#about p {
+    margin-bottom: 0.5rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Remove vertical centering in About section */
+#about.resume-section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+#about .my-auto {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Tighter spacing in About resume-item */
+#about .resume-item {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Reduce heading margins in About */
+#about h1 {
+    margin-bottom: 0.5rem !important;
+}
+
+#about .subheading {
+    margin-bottom: 1rem !important;
+}
+
+/* Reduce spacing in section content */
+.my-auto {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Tighter spacing for publications list */
+.resume-item {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Remove excessive padding from section headers */
+h2 {
+    margin-bottom: 1rem !important;
+}
+
+/* Reduce gap created by flexbox */
+.resume-section.d-flex.flex-column {
+    min-height: auto !important;
+}
