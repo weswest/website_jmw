@@ -1,0 +1,9 @@
+{{ define "main" }}
+<section class="page-list">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ range .Pages }}
+  {{ partial "article-card.html" . }}
+  {{ end }}
+</section>
+{{ end }}

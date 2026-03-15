@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="article">
+  <header class="article__header">
+    <h1 class="article__title">{{ .Title }}</h1>
+    <div class="article__meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.source }}<span class="article__source">{{ . }}</span>{{ end }}
+      {{ with .Params.originalUrl }}<a href="{{ . }}" class="article__original">Original publication →</a>{{ end }}
+    </div>
+  </header>
+  <div class="article__content">
+    {{ .Content }}
+  </div>
+  <footer class="article__footer">
+    {{ with .Params.tags }}
+    <div class="article__tags">
+      {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+    <a href="/writing/" class="article__back">← Back to Writing</a>
+  </footer>
+</article>
+{{ end }}

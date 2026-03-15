@@ -1,0 +1,29 @@
+{
+    "current": {
+        "name": "Nomis Solutions",
+        "logo": "/img/logos/nomis.png",
+        "url": "https://nomissolutions.com/"
+    },
+    "prior": [
+        {
+            "name": "Huntington Bank",
+            "logo": "/img/logos/huntington.png",
+            "url": "https://www.huntington.com/"
+        },
+        {
+            "name": "Novantas / Curinos",
+            "logo": "/img/logos/novantas.png",
+            "url": "https://www.curinos.com/"
+        },
+        {
+            "name": "Citigroup",
+            "logo": "/img/logos/citi.png",
+            "url": "https://www.citigroup.com/"
+        },
+        {
+            "name": "J.P. Morgan Chase",
+            "logo": "/img/logos/jpmc.png",
+            "url": "https://www.jpmorganchase.com/"
+        }
+    ]
+}

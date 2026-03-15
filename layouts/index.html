@@ -1,27 +1,85 @@
 {{ define "main" }}
-   {{ partial "about.html" .}}
-   {{ $projects := slice "creations" "contributions" }}
-   {{ $sections := slice "blog" }}
-   {{ $site := .Site }}
-   {{ range .Site.Params.sections }}
-      {{ $sectionName := . }}
-      {{ if in $projects . }}
-         {{ with $site.GetPage "section" (printf "projects/%s" .) }}
-            {{ .Scratch.Set "sectionId" $sectionName }}
-            {{ partial "sectionSummary" . }}
-         {{ end }}
-      {{ else if eq . "publications" }}
-         {{ with $site.GetPage "section" . }}
-            {{ .Scratch.Set "sectionId" $sectionName }}
-            {{ partial "publicationsSectionSummary" . }}
-         {{ end }}
-      {{ else if in $sections . }}
-         {{ with $site.GetPage "section" . }}
-            {{ .Scratch.Set "sectionId" $sectionName }}
-            {{ partial "sectionSummary" . }}
-         {{ end }}
-      {{ else }}
-         {{ partial (printf "portfolio/%s" . ) $.Site }}
+
+{{/* ===== HERO: Photo + Name + Positioning + Logos ===== */}}
+<section class="hero">
+  <div class="hero__portrait">
+    <img src="{{ .Site.Params.profileImage | relURL }}" alt="{{ .Site.Title }}" class="hero__photo">
+  </div>
+  <div class="hero__text">
+    <h1 class="hero__name">{{ .Site.Title }}</h1>
+    <p class="hero__positioning">{{ .Site.Params.positioning | safeHTML }}</p>
+    <div class="hero__employers">
+      <div class="hero__employer-row">
+        <span class="hero__employer-label">Current</span>
+        {{ with .Site.Data.employers.current }}
+        <a href="{{ .url }}" class="employer-logo" title="{{ .name }}">
+          <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+        </a>
+        {{ end }}
+      </div>
+      <div class="hero__employer-row">
+        <span class="hero__employer-label">Prior</span>
+        {{ range .Site.Data.employers.prior }}
+        <a href="{{ .url }}" class="employer-logo" title="{{ .name }}">
+          <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/* ===== PILLARS ===== */}}
+<section class="pillars">
+  <div class="pillars__grid">
+    {{ range .Site.Data.pillars }}
+    <div class="pillar-card">
+      <h3 class="pillar-card__title">{{ .title }}</h3>
+      <p class="pillar-card__desc">{{ .description }}</p>
+      {{ if .link }}
+      <a href="{{ .link }}" class="pillar-card__link">{{ .linkText }}</a>
       {{ end }}
-   {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{/* ===== PRINCIPLES ===== */}}
+<section class="principles">
+  <ol class="principles__list">
+    {{ range .Site.Data.principles }}
+    <li class="principle">
+      <strong class="principle__title">{{ .title }}</strong>
+      <span class="principle__desc">{{ .description | safeHTML }}</span>
+    </li>
+    {{ end }}
+  </ol>
+</section>
+
+{{/* ===== LATEST WRITING ===== */}}
+{{ $writing := where .Site.RegularPages "Section" "writing" }}
+{{ if $writing }}
+<section class="latest-writing">
+  <h2 class="section-heading">Latest Writing</h2>
+  <div class="latest-writing__grid">
+    {{ range first 3 (sort $writing "Date" "desc") }}
+    {{ partial "article-card.html" . }}
+    {{ end }}
+  </div>
+  <a href="/writing/" class="latest-writing__more">All writing →</a>
+</section>
+{{ end }}
+
+{{/* ===== CONTACT ===== */}}
+<section class="contact">
+  <div class="contact__links">
+    {{ range .Site.Params.handles }}
+    <a href="{{ .link }}" class="contact__link">{{ .name }}</a>
+    {{ end }}
+    {{ with .Site.Params.email }}
+    <a href="mailto:{{ . }}" class="contact__link">Email</a>
+    {{ end }}
+  </div>
+</section>
+
 {{ end }}

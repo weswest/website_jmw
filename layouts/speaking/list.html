@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="speaking-list">
+  <h1 class="speaking-list__title">Speaking</h1>
+
+  {{ .Content }}
+
+  {{ $featured := where .Pages ".Params.featured" true }}
+  {{ if $featured }}
+  <div class="speaking-list__featured">
+    {{ range $featured }}
+    <div class="speaking-entry speaking-entry--featured">
+      <h3><a href="{{ with .Params.link }}{{ . }}{{ else }}{{ .RelPermalink }}{{ end }}">{{ .Title }}</a></h3>
+      <p class="speaking-entry__meta">{{ .Params.event }} · {{ .Date.Format "January 2006" }}</p>
+      <p>{{ .Description }}</p>
+      {{ with .Params.videoUrl }}
+      <a href="{{ . }}" class="speaking-entry__video">Watch →</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ $regular := where .Pages ".Params.featured" "!=" true }}
+  {{ if $regular }}
+  <h2 class="speaking-list__subtitle">Engagements</h2>
+  <ul class="speaking-list__entries">
+    {{ range sort $regular "Date" "desc" }}
+    <li class="speaking-entry">
+      <span class="speaking-entry__title">{{ .Title }}</span>
+      <span class="speaking-entry__event">{{ .Params.event }}</span>
+      <span class="speaking-entry__date">{{ .Date.Format "January 2006" }}</span>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>
+{{ end }}

@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="writing-list">
+  <h1 class="writing-list__title">Writing</h1>
+
+  {{/* Collect all tags and sources for filtering */}}
+  {{ $allPages := .Pages }}
+  {{ $sources := slice }}
+  {{ range $allPages }}
+    {{ with .Params.source }}
+      {{ $sources = $sources | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $sources = $sources | uniq }}
+
+  {{ if $sources }}
+  <div class="writing-list__filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    {{ range $sources }}
+    <button class="filter-btn" data-filter="{{ . | urlize }}">{{ . }}</button>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <div class="writing-list__articles">
+    {{ range sort $allPages "Date" "desc" }}
+    <div class="writing-list__item" {{ with .Params.source }}data-source="{{ . | urlize }}"{{ end }}>
+      {{ partial "article-card.html" . }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var filter = this.getAttribute('data-filter');
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    document.querySelectorAll('.writing-list__item').forEach(function(item) {
+      if (filter === 'all' || item.getAttribute('data-source') === filter) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+{{ end }}
