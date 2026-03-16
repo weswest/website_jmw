@@ -6,6 +6,8 @@
   <aside class="sidebar">
     <img src="{{ .Site.Params.profileImage | relURL }}" alt="{{ .Site.Title }}" class="sidebar__photo">
     <h1 class="sidebar__name">{{ .Site.Title }}</h1>
+    {{ with .Site.Params.title }}<p class="sidebar__title">{{ . }}</p>{{ end }}
+    {{ with .Site.Params.bio }}<p class="sidebar__bio">{{ . | safeHTML }}</p>{{ end }}
 
     <div class="sidebar__employers">
       {{ with .Site.Data.employers.current }}

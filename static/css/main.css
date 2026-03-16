@@ -158,7 +158,25 @@ img {
   color: var(--sidebar-heading);
   text-align: center;
   line-height: 1.2;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.sidebar__title {
+  font-size: 0.75rem;
+  color: var(--sidebar-accent);
+  text-align: center;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar__bio {
+  font-size: 0.78rem;
+  color: var(--sidebar-text);
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
 }
 
 .sidebar__employers {

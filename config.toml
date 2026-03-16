@@ -20,6 +20,7 @@ favicon = "/favicon.ico"
 firstName = "Wes"
 lastName = "West"
 profileImage = "img/headshot_smiling.png"
+title = "Chief Analytics and AI Officer at Global Fintech"
 positioning = "Turning hard analytical problems into decisions executives act on. Now with AI."
 
 [[params.handles]]
