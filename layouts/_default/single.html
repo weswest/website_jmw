@@ -11,6 +11,11 @@
   <div class="article__content">
     {{ .Content }}
   </div>
+  {{ with .Params.pdf }}
+  <div class="article__pdf">
+    <embed src="{{ . }}" type="application/pdf" width="100%" height="800px" />
+  </div>
+  {{ end }}
   <footer class="article__footer">
     {{ with .Params.tags }}
     <div class="article__tags">

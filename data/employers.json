@@ -1,29 +1,37 @@
 {
     "current": {
         "name": "Nomis Solutions",
-        "logo": "/img/logos/nomis.png",
-        "url": "https://nomissolutions.com/"
+        "logo": "/img/logos/nomis_logo.png",
+        "url": "https://nomissolutions.com/",
+        "height": "40px"
     },
     "prior": [
         {
-            "name": "Huntington Bank",
-            "logo": "/img/logos/huntington.png",
-            "url": "https://www.huntington.com/"
-        },
-        {
-            "name": "Novantas / Curinos",
-            "logo": "/img/logos/novantas.png",
-            "url": "https://www.curinos.com/"
+            "name": "J.P. Morgan Chase",
+            "logo": "/img/logos/jpmc.png",
+            "url": "https://www.jpmorganchase.com/",
+            "height": "22px",
+            "invert": true
         },
         {
             "name": "Citigroup",
             "logo": "/img/logos/citi.png",
-            "url": "https://www.citigroup.com/"
+            "url": "https://www.citigroup.com/",
+            "height": "22px",
+            "invert": true
         },
         {
-            "name": "J.P. Morgan Chase",
-            "logo": "/img/logos/jpmc.png",
-            "url": "https://www.jpmorganchase.com/"
+            "name": "Huntington Bank",
+            "logo": "/img/logos/huntington.png",
+            "url": "https://www.huntington.com/",
+            "height": "22px",
+            "invert": true
+        },
+        {
+            "name": "Novantas / Curinos",
+            "logo": "/img/logos/Novantas_Logo.jpg",
+            "url": "https://www.curinos.com/",
+            "height": "36px"
         }
     ]
 }

@@ -19,7 +19,7 @@ email = "jmwest@gmail.com"
 favicon = "/favicon.ico"
 firstName = "Wes"
 lastName = "West"
-profileImage = "img/Headshot.jpg"
+profileImage = "img/headshot_smiling.png"
 positioning = "Turning hard analytical problems into decisions executives act on. Now with AI."
 
 [[params.handles]]
@@ -41,5 +41,5 @@ home = ["HTML"]
 tag = "tags"
 
 [permalinks]
-writing = "/writing/:slug/"
-speaking = "/speaking/:slug/"
+writing = "/writing/:filename/"
+speaking = "/speaking/:filename/"

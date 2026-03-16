@@ -3,24 +3,24 @@
         "title": "See all of the options.",
         "description": "The first step isn't building — it's mapping the full solution space so you know what you're choosing between. Business objectives are achieved through tangible work products, and each one carries its own cost/benefit profile.",
         "link": "",
-        "linkText": ""
+        "linkText": "Read more"
     },
     {
         "title": "Optimize the cost/benefit tradeoff.",
         "description": "Accuracy, interpretability, speed to production, regulatory burden — every business decision is a multi-dimensional tradeoff. \"Most accurate\" or \"highest ROI\" is rarely the best answer. Twenty years across analytics, strategy, and operations have revealed which tradeoffs in which contexts actually matter.",
-        "link": "",
-        "linkText": ""
+        "link": "/writing/complexity-tax/",
+        "linkText": "The Complexity Tax"
     },
     {
         "title": "Execute efficiently.",
         "description": "Whether it's a model build, a platform migration, or a product rollout — the skill is the same: decompose, sequence, find the bottleneck, solve it. The right sequencing means early deliverables generate value while the rest are still being built.",
         "link": "",
-        "linkText": ""
+        "linkText": "Read more"
     },
     {
         "title": "Make it land.",
         "description": "Analytics is only as valuable as the decision it changes. Board and C-suite audiences don't need to understand the methodology — they need to understand the implications, the tradeoffs, and recommendations.",
         "link": "",
-        "linkText": ""
+        "linkText": "Read more"
     }
 ]

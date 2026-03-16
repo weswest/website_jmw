@@ -1,85 +1,89 @@
 {{ define "main" }}
 
-{{/* ===== HERO: Photo + Name + Positioning + Logos ===== */}}
-<section class="hero">
-  <div class="hero__portrait">
-    <img src="{{ .Site.Params.profileImage | relURL }}" alt="{{ .Site.Title }}" class="hero__photo">
-  </div>
-  <div class="hero__text">
-    <h1 class="hero__name">{{ .Site.Title }}</h1>
-    <p class="hero__positioning">{{ .Site.Params.positioning | safeHTML }}</p>
-    <div class="hero__employers">
-      <div class="hero__employer-row">
-        <span class="hero__employer-label">Current</span>
-        {{ with .Site.Data.employers.current }}
+<div class="home-layout">
+
+  {{/* ===== SIDEBAR: Identity ===== */}}
+  <aside class="sidebar">
+    <img src="{{ .Site.Params.profileImage | relURL }}" alt="{{ .Site.Title }}" class="sidebar__photo">
+    <h1 class="sidebar__name">{{ .Site.Title }}</h1>
+
+    <div class="sidebar__employers">
+      {{ with .Site.Data.employers.current }}
+      <div class="sidebar__employer-group">
+        <span class="sidebar__label">Current</span>
         <a href="{{ .url }}" class="employer-logo" title="{{ .name }}">
-          <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+          <img src="{{ .logo | relURL }}" alt="{{ .name }}" style="height: {{ .height }}">
         </a>
-        {{ end }}
       </div>
-      <div class="hero__employer-row">
-        <span class="hero__employer-label">Prior</span>
-        {{ range .Site.Data.employers.prior }}
-        <a href="{{ .url }}" class="employer-logo" title="{{ .name }}">
-          <img src="{{ .logo | relURL }}" alt="{{ .name }}">
-        </a>
-        {{ end }}
+      {{ end }}
+      <div class="sidebar__employer-group">
+        <span class="sidebar__label">Prior</span>
+        <div class="sidebar__logo-row">
+          {{ range .Site.Data.employers.prior }}
+          <a href="{{ .url }}" class="employer-logo{{ if .invert }} employer-logo--invert{{ end }}" title="{{ .name }}">
+            <img src="{{ .logo | relURL }}" alt="{{ .name }}" style="height: {{ .height }}">
+          </a>
+          {{ end }}
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-{{/* ===== PILLARS ===== */}}
-<section class="pillars">
-  <div class="pillars__grid">
-    {{ range .Site.Data.pillars }}
-    <div class="pillar-card">
-      <h3 class="pillar-card__title">{{ .title }}</h3>
-      <p class="pillar-card__desc">{{ .description }}</p>
-      {{ if .link }}
-      <a href="{{ .link }}" class="pillar-card__link">{{ .linkText }}</a>
+    <div class="sidebar__contact">
+      {{ range .Site.Params.handles }}
+      <a href="{{ .link }}" class="sidebar__contact-link">{{ .name }}</a>
+      {{ end }}
+      {{ with .Site.Params.email }}
+      <a href="mailto:{{ . }}" class="sidebar__contact-link">Email</a>
       {{ end }}
     </div>
-    {{ end }}
-  </div>
-</section>
+  </aside>
 
-{{/* ===== PRINCIPLES ===== */}}
-<section class="principles">
-  <ol class="principles__list">
-    {{ range .Site.Data.principles }}
-    <li class="principle">
-      <strong class="principle__title">{{ .title }}</strong>
-      <span class="principle__desc">{{ .description | safeHTML }}</span>
-    </li>
-    {{ end }}
-  </ol>
-</section>
+  {{/* ===== MAIN CONTENT ===== */}}
+  <div class="home-content">
 
-{{/* ===== LATEST WRITING ===== */}}
-{{ $writing := where .Site.RegularPages "Section" "writing" }}
-{{ if $writing }}
-<section class="latest-writing">
-  <h2 class="section-heading">Latest Writing</h2>
-  <div class="latest-writing__grid">
-    {{ range first 3 (sort $writing "Date" "desc") }}
-    {{ partial "article-card.html" . }}
-    {{ end }}
-  </div>
-  <a href="/writing/" class="latest-writing__more">All writing →</a>
-</section>
-{{ end }}
+    {{/* ===== PILLARS ===== */}}
+    <section class="pillars">
+      <div class="pillars__grid">
+        {{ range .Site.Data.pillars }}
+        <div class="pillar-card">
+          <h3 class="pillar-card__title">{{ .title }}</h3>
+          <p class="pillar-card__desc">{{ .description }}</p>
+          {{ if .link }}
+          <a href="{{ .link }}" class="pillar-card__link">{{ .linkText }} →</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </section>
 
-{{/* ===== CONTACT ===== */}}
-<section class="contact">
-  <div class="contact__links">
-    {{ range .Site.Params.handles }}
-    <a href="{{ .link }}" class="contact__link">{{ .name }}</a>
+    {{/* ===== PRINCIPLES ===== */}}
+    <section class="principles">
+      <h2 class="section-label">Principles</h2>
+      <ol class="principles__list">
+        {{ range .Site.Data.principles }}
+        <li class="principle">
+          <strong class="principle__title">{{ .title }}</strong>
+          <span class="principle__desc">{{ .description | safeHTML }}</span>
+        </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    {{/* ===== LATEST WRITING ===== */}}
+    {{ $writing := where .Site.RegularPages "Section" "writing" }}
+    {{ if $writing }}
+    <section class="latest-writing">
+      <h2 class="section-label">Latest Writing</h2>
+      <div class="latest-writing__grid">
+        {{ range first 3 (sort $writing "Date" "desc") }}
+        {{ partial "article-card.html" . }}
+        {{ end }}
+      </div>
+      <a href="/writing/" class="text-link">All writing →</a>
+    </section>
     {{ end }}
-    {{ with .Site.Params.email }}
-    <a href="mailto:{{ . }}" class="contact__link">Email</a>
-    {{ end }}
+
   </div>
-</section>
+</div>
 
 {{ end }}

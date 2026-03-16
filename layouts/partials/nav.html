@@ -1,5 +1,8 @@
 <nav class="site-nav">
-  <a href="/" class="site-nav__name">{{ .Site.Title }}</a>
+  <div class="site-nav__brand">
+    <a href="/" class="site-nav__name">{{ .Site.Title }}</a>
+    <span class="site-nav__tagline">{{ .Site.Params.positioning }}</span>
+  </div>
   <div class="site-nav__links">
     <a href="/" {{ if .IsHome }}class="active"{{ end }}>Home</a>
     <a href="/writing/" {{ if eq .Section "writing" }}class="active"{{ end }}>Writing</a>
