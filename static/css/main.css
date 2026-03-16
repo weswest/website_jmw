@@ -4,7 +4,7 @@
   --sidebar-text: #c8c5c0;
   --sidebar-heading: #f0eeeb;
   --sidebar-accent: #b8977a;
-  --sidebar-width: 280px;
+  --sidebar-width: min(280px, 22vw);
 
   --main-bg: #faf8f5;
   --main-text: #2d2d2d;
@@ -15,6 +15,8 @@
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
+
+  --content-padding: clamp(1rem, 4vw, 4rem);
 }
 
 /* ===== RESET & BASE ===== */
@@ -25,7 +27,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: clamp(15px, 1vw, 17px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -58,15 +60,17 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2rem;
+  padding: 1rem var(--content-padding);
   background: var(--main-bg);
   border-bottom: 1px solid var(--main-border);
+  gap: 1rem;
 }
 
 .site-nav__brand {
   display: flex;
   align-items: baseline;
   gap: 0;
+  min-width: 0;
 }
 
 .site-nav__name {
@@ -78,6 +82,7 @@ img {
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  flex-shrink: 0;
 }
 
 .site-nav__tagline {
@@ -85,17 +90,19 @@ img {
   font-size: 0.85rem;
   color: var(--main-muted);
   font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   margin-left: 0.5rem;
   padding-left: 0.5rem;
   border-left: 1px solid var(--main-border);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .site-nav__links {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
+  flex-shrink: 0;
 }
 
 .site-nav__links a {
@@ -124,7 +131,7 @@ img {
 /* ===== SIDEBAR ===== */
 .sidebar {
   background: var(--sidebar-bg);
-  padding: 2.5rem 1.75rem;
+  padding: 2.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,8 +142,8 @@ img {
 }
 
 .sidebar__photo {
-  width: 140px;
-  height: 140px;
+  width: clamp(80px, 10vw, 140px);
+  height: clamp(80px, 10vw, 140px);
   border-radius: 50%;
   object-fit: cover;
   object-position: center 15%;
@@ -146,21 +153,12 @@ img {
 
 .sidebar__name {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 1.5vw, 1.6rem);
   font-weight: 700;
   color: var(--sidebar-heading);
   text-align: center;
   line-height: 1.2;
   margin-bottom: 0.75rem;
-}
-
-.sidebar__positioning {
-  font-size: 0.82rem;
-  color: var(--sidebar-text);
-  text-align: center;
-  line-height: 1.55;
-  margin-bottom: 2rem;
-  font-weight: 300;
 }
 
 .sidebar__employers {
@@ -237,8 +235,7 @@ img {
 
 /* ===== MAIN CONTENT (HOME) ===== */
 .home-content {
-  padding: 3rem 4rem 4rem;
-  max-width: 960px;
+  padding: var(--content-padding);
 }
 
 /* ===== SECTION LABELS ===== */
@@ -261,7 +258,7 @@ img {
 
 .pillars__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.25rem;
 }
 
@@ -426,13 +423,14 @@ img {
 
 /* ===== SITE MAIN (non-home pages) ===== */
 .site-main {
-  max-width: 860px;
+  width: min(100%, 860px);
   margin: 0 auto;
-  padding: 2rem 2rem 4rem;
+  padding: 2rem var(--content-padding) 4rem;
 }
 
 /* Override site-main when home layout is present */
 body:has(.home-layout) .site-main {
+  width: 100%;
   max-width: none;
   margin: 0;
   padding: 0;
@@ -547,6 +545,7 @@ body:has(.home-layout) .site-main {
   border-bottom: 1px solid var(--main-border);
   font-size: 0.85rem;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 
 .speaking-entry__title {
@@ -578,7 +577,7 @@ body:has(.home-layout) .site-main {
 
 .article__title {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 0.75rem;
@@ -591,6 +590,7 @@ body:has(.home-layout) .site-main {
   align-items: baseline;
   font-size: 0.8rem;
   color: var(--main-muted);
+  flex-wrap: wrap;
 }
 
 .article__source {
@@ -672,6 +672,10 @@ body:has(.home-layout) .site-main {
   color: inherit;
 }
 
+.article__pdf {
+  margin-top: 2rem;
+}
+
 .article__footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -701,16 +705,12 @@ body:has(.home-layout) .site-main {
 
 /* ===== FOOTER ===== */
 .site-footer {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.5rem var(--content-padding);
   border-top: 1px solid var(--main-border);
 }
 
 body:has(.home-layout) .site-footer {
-  max-width: none;
   margin-left: var(--sidebar-width);
-  padding: 1.5rem 3.5rem;
 }
 
 .site-footer__content {
@@ -718,7 +718,7 @@ body:has(.home-layout) .site-footer {
   color: var(--main-muted);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE: MOBILE ===== */
 @media (max-width: 768px) {
   .home-layout {
     grid-template-columns: 1fr;
@@ -727,56 +727,53 @@ body:has(.home-layout) .site-footer {
   .sidebar {
     position: relative;
     height: auto;
-    padding: 2rem 1.5rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+    padding: 1.5rem var(--content-padding);
+    text-align: center;
   }
 
   .sidebar__photo {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
 
   .sidebar__name {
-    font-size: 1.3rem;
-    width: 100%;
-  }
-
-  .sidebar__positioning {
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
   }
 
   .sidebar__employers {
-    flex-direction: row;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
     margin-bottom: 1rem;
     padding-bottom: 0;
+    align-items: center;
+  }
+
+  .sidebar__logo-row {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .sidebar__logo-row .employer-logo img {
+    height: 16px !important;
   }
 
   .sidebar__contact {
     flex-direction: row;
     gap: 1rem;
+    justify-content: center;
     border-top: none;
-    padding-top: 0;
+    padding-top: 0.75rem;
   }
 
-  .home-content {
-    padding: 2rem 1.5rem;
+  .site-nav__tagline {
+    display: none;
   }
 
-  .pillars__grid {
-    grid-template-columns: 1fr;
+  .site-nav__links {
+    gap: 1rem;
   }
 
   body:has(.home-layout) .site-footer {
     margin-left: 0;
-    padding: 1.5rem;
-  }
-
-  .speaking-list__entries .speaking-entry {
-    flex-direction: column;
-    gap: 0.25rem;
   }
 }

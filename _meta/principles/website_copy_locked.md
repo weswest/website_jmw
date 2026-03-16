@@ -129,6 +129,8 @@ What to change:
 - Writing page uses Evans essay-card format with source tags in addition to topic tags
 - Color/font palette: not a priority. Clean and professional. No strong opinion on dark vs. light yet.
 
+**Core design principle: Design for fluidity, not fixed width.** Use percentages, viewport units, and flexible layouts — never hardcode pixel widths that break at different screen sizes. The site must look good from 375px mobile to 2560px ultrawide without media query hacks for every breakpoint.
+
 ## Navigation Flow
 
 Home → About (the argument, which IS the home page) → Writing (the evidence)
