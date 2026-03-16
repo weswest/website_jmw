@@ -237,8 +237,8 @@ img {
 
 /* ===== MAIN CONTENT (HOME) ===== */
 .home-content {
-  padding: 3rem 3.5rem 4rem;
-  max-width: 780px;
+  padding: 3rem 4rem 4rem;
+  max-width: 960px;
 }
 
 /* ===== SECTION LABELS ===== */
@@ -426,9 +426,9 @@ img {
 
 /* ===== SITE MAIN (non-home pages) ===== */
 .site-main {
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2rem 2rem 4rem;
 }
 
 /* Override site-main when home layout is present */
