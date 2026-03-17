@@ -9,8 +9,10 @@
 <meta property="og:image" content="{{ with .Params.image }}{{ . | absURL }}{{ else }}{{ "img/og-image.png" | absURL }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
-<meta property="article:author" content="https://www.linkedin.com/in/wes-west/">
-<meta name="author" content="{{ .Site.Title }}">
+<meta property="article:author" content="Wes West">
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta name="author" content="Wes West">
+<link rel="author" href="https://www.linkedin.com/in/wes-west/">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
