@@ -699,6 +699,12 @@ body:has(.home-layout) .site-main {
   border-bottom: 1px solid var(--main-border);
 }
 
+.article__hero {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
 .article__title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.2rem);

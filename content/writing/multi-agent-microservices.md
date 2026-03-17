@@ -4,6 +4,7 @@ date: 2026-03-17
 description: "I'm running an all-AI team of seven programmers and a manager. Why does it work? Because an agentic coding team is both a software architecture problem and a team management problem — and the same patterns that work for human engineering organizations work here."
 source: "Personal"
 tags: ["AI", "Multi-Agent Systems", "Leadership", "Software Architecture"]
+image: "/img/multi-agent-microservices-hero.jpg"
 ---
 
 I'm running an all-AI team of seven programmers and a manager. I provide guidance, strategic direction, and surgical intervention; the seven programmers handle their workloads; the manager coordinates. It works really well.

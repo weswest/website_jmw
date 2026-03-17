@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article class="article">
   <header class="article__header">
+    {{ with .Params.image }}<img src="{{ . }}" alt="" class="article__hero">{{ end }}
     <h1 class="article__title">{{ .Title }}</h1>
     <div class="article__meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
