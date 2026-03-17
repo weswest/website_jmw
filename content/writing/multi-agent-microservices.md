@@ -1,3 +1,11 @@
+---
+title: "It's Just Microservices and Team Management"
+date: 2026-03-17
+description: "I'm running an all-AI team of seven programmers and a manager. Why does it work? Because an agentic coding team is both a software architecture problem and a team management problem — and the same patterns that work for human engineering organizations work here."
+source: "Personal"
+tags: ["AI", "Multi-Agent Systems", "Leadership", "Software Architecture"]
+---
+
 I'm running an all-AI team of seven programmers and a manager. I provide guidance, strategic direction, and surgical intervention; the seven programmers handle their workloads; the manager coordinates. It works really well.
 
 Why does it work so well? The short version: I didn't invent anything. I just noticed that an agentic coding team is both a software architecture problem and a team management problem at the same time, and applied known best practices from both.
@@ -29,7 +37,7 @@ Documentation as a first-class team member. A dedicated documentation agent mean
 
 Broad autonomy with surgical intervention. Let agents run. Correct when they drift — fix a testing philosophy, catch an architectural conflation, redirect a misguided approach. This is servant leadership: you invest heavily in guardrails, standards, and governance upfront so you can stay out of the way during execution. The alternative — micromanaging every agent's decisions — defeats the purpose of having agents at all.
 
-Retrospectives drive process improvement. The /insights report I mentioned yesterday feeds directly back to the manager agent as instructions for refining its operating model. Closed-loop process improvement, running automatically.
+Retrospectives drive process improvement. The /insights report feeds directly back to the manager agent as instructions for refining its operating model. Closed-loop process improvement, running automatically.
 
 
 ## The Sprint Cycle
