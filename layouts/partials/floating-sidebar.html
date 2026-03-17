@@ -1,0 +1,19 @@
+{{ if not .IsHome }}
+<aside class="floating-sidebar">
+  <a href="/" class="floating-sidebar__photo-link">
+    <img src="{{ .Site.Params.profileImage | relURL }}" alt="{{ .Site.Title }}" class="floating-sidebar__photo">
+  </a>
+  <div class="floating-sidebar__info">
+    <a href="/" class="floating-sidebar__name">{{ .Site.Title }}</a>
+    {{ with .Site.Params.title }}<p class="floating-sidebar__title">{{ . }}</p>{{ end }}
+  </div>
+  <div class="floating-sidebar__links">
+    {{ range .Site.Params.handles }}
+    <a href="{{ .link }}" class="floating-sidebar__link" title="{{ .name }}">{{ .name }}</a>
+    {{ end }}
+    {{ with .Site.Params.email }}
+    <a href="mailto:{{ . }}" class="floating-sidebar__link" title="Email">Email</a>
+    {{ end }}
+  </div>
+</aside>
+{{ end }}

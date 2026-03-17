@@ -451,11 +451,96 @@ img {
   font-weight: 500;
 }
 
+/* ===== FLOATING SIDEBAR (non-home pages) ===== */
+.floating-sidebar {
+  position: fixed;
+  top: 50%;
+  left: 1.25rem;
+  transform: translateY(-50%);
+  width: 140px;
+  background: var(--sidebar-bg);
+  border-radius: 6px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-sidebar__photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 2px solid rgba(184, 151, 122, 0.3);
+}
+
+.floating-sidebar__photo-link {
+  line-height: 0;
+}
+
+.floating-sidebar__info {
+  text-align: center;
+}
+
+.floating-sidebar__name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--sidebar-heading);
+  text-decoration: none;
+  display: block;
+  line-height: 1.2;
+}
+
+.floating-sidebar__name:hover {
+  color: var(--sidebar-accent);
+}
+
+.floating-sidebar__title {
+  font-size: 0.6rem;
+  color: var(--sidebar-text);
+  line-height: 1.4;
+  margin-top: 0.2rem;
+  font-weight: 300;
+}
+
+.floating-sidebar__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.floating-sidebar__link {
+  font-size: 0.65rem;
+  color: var(--sidebar-accent);
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.floating-sidebar__link:hover {
+  color: var(--sidebar-heading);
+}
+
 /* ===== SITE MAIN (non-home pages) ===== */
 .site-main {
   width: min(100%, 860px);
   margin: 0 auto;
   padding: 2rem var(--content-padding) 4rem;
+}
+
+body:has(.floating-sidebar) .site-main {
+  margin-left: max(auto, 180px);
+  margin-right: auto;
+  width: min(100% - 180px, 860px);
 }
 
 /* Override site-main when home layout is present */
@@ -797,6 +882,15 @@ body:has(.home-layout) .site-footer {
 
   .site-nav__tagline {
     display: none;
+  }
+
+  .floating-sidebar {
+    display: none;
+  }
+
+  body:has(.floating-sidebar) .site-main {
+    margin-left: auto;
+    width: min(100%, 860px);
   }
 
   .site-nav__links {
