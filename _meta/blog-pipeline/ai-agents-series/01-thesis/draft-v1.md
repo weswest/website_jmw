@@ -1,6 +1,6 @@
-People asked for more details on the multi-agent Claude Code workflow I mentioned yesterday. Happy to share the thinking.
+I'm running an all-AI team of seven programmers and a manager. I provide guidance, strategic direction, and surgical intervention; the seven programmers handle their workloads; the manager coordinates. It works really well.
 
-The short version: I didn't invent anything. I just noticed that an agentic coding team is both a software architecture problem and a team management problem at the same time, and applied known best practices from both.
+Why does it work so well? The short version: I didn't invent anything. I just noticed that an agentic coding team is both a software architecture problem and a team management problem at the same time, and applied known best practices from both.
 
 
 ## The Architecture
