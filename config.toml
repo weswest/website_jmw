@@ -33,7 +33,7 @@ name = "GitHub"
 
 [params.google]
 [params.google.analytics]
-trackerID = "XX-123446-01"
+trackerID = "G-LTPEPVS2Q1"
 
 [outputs]
 home = ["HTML", "RSS"]
