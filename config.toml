@@ -36,7 +36,8 @@ name = "GitHub"
 trackerID = "XX-123446-01"
 
 [outputs]
-home = ["HTML"]
+home = ["HTML", "RSS"]
+section = ["HTML", "RSS"]
 
 [taxonomies]
 tag = "tags"
