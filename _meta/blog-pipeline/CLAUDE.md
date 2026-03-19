@@ -94,3 +94,14 @@ When presenting copy alternatives, show the variants first, then isolate the 2-4
 
 ### Structure
 - **Headers state the point, not tease it.** Pyramid Principle: every header should tell the reader what the section argues. No "The Punchline" — lead with the answer, then support it.
+- **Pyramid Principle is the editorial standard.** Governing thought first. Support below. Chronological process walkthroughs need to be restructured around the argument, not the timeline. But context-setting openers linking to previous articles are still needed for standalone readability.
+- **Series articles open with linked context.** When an article builds on previous ones, the opener should name and link the predecessors, summarize what they established, and state what this article adds.
+
+### Precision and framing rules (from editing cycles)
+- **Be precise about who does what.** The system handles rote code management (testing, merging, documentation, convention enforcement). Wes provides domain expertise and strategic direction. Misattributing agency — saying the system implements domain knowledge when Wes does — undermines the thesis. Get the mechanics right.
+- **Frame bidirectional systems as bidirectional.** The proposal system is both bottom-up (agents surfacing issues) and top-down (Wes injecting strategic direction). Any system that works both ways must be presented as such. Missing one direction makes the system sound passive.
+- **Address reader anxieties head-on.** Engineers have strong priors (merge conflicts are hard, AI code is unreliable, etc.). Glossing over these loses credibility with the exact audience reading this. Name the concern, then explain why it's handled.
+- **Honest about imperfection.** Never present the system as working perfectly. The Claude Code "never ever do this" aside, the "will never achieve flawless execution" framing — these build trust. Overselling undermines everything.
+- **Examples must be framed as examples.** "For example" or "in one case" matters. Without explicit framing, a specific instance reads as the only instance.
+- **Tie back to management principles.** When a system behavior maps to a core principle from the About page (e.g., "trust scales with demonstrated judgment"), make the connection explicitly. Link to weswest.ai when possible. Builds a coherent body of work across articles.
+- **Asides for Management 101 connections.** When the article describes a system behavior that maps to basic management (manage by objective, don't micromanage), note the connection — but as an aside or footnote, not as the main text. The reader should see the parallel without being lectured.
