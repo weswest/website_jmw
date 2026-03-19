@@ -4,6 +4,7 @@ date: 2026-03-24
 description: "Most people are trying to skip the management skill. Here's the three-layer enforcement model I use for my AI coding team — and why it looks exactly like goals-oriented management."
 source: "Personal"
 tags: ["AI", "Multi-Agent Systems", "Leadership", "Management"]
+image: "/img/policy-enforcement-hero.jpg"
 ---
 
 Agentic AI is a management problem. Most people have never managed others' work — never had to set someone else's objectives, define best practices, verbalize exactly what "success" and "failure" look like, implement an organizational structure, and then quality-control the output. That's the new skill, and most of the field is trying to skip it.
