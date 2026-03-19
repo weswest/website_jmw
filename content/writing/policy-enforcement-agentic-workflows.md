@@ -1,6 +1,6 @@
 ---
 title: "Policy Enforcement for Agentic Workflows"
-date: 2026-03-18
+date: 2026-03-24
 description: "Most people are trying to skip the management skill. Here's the three-layer enforcement model I use for my AI coding team — and why it looks exactly like goals-oriented management."
 source: "Personal"
 tags: ["AI", "Multi-Agent Systems", "Leadership", "Management"]
