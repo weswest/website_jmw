@@ -126,9 +126,10 @@ gh issue close <number>            # Close when done
 1. Professional portfolio (resume, publications, projects)
 2. Content pipeline for a management book - interview transcripts become blog posts become book chapters
 
-**Key resources in `_meta/`:**
+**Key resources — all instructions live in folder-appropriate CLAUDE.md files:**
+- `_meta/blog-pipeline/CLAUDE.md` - **Writing voice, style, tone, positioning, and broader themes.** The single source of truth for all article/blog drafting.
+- `_meta/principles/CLAUDE.md` - **Website design and layout decisions.** Page structure, visual direction, content strategy.
 - `_meta/README.md` - Project overview and vision
-- `_meta/principles/website_copy_locked.md` - **READ THIS FIRST for any content/design work.** Locked positioning, pillars, principles, voice guide, and detailed style notes from iterative design session. Contains everything needed to write copy that sounds like Wes.
 - `_meta/principles/perplexity_website_best_practices.md` - Best practice research for C-suite personal websites
 - `_meta/interviews/questions/` - Interview questions with Q1-Q3 already answered
 - `_meta/project-management/` - Historical session notes
