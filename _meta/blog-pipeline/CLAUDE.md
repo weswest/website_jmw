@@ -64,6 +64,14 @@ Analytics is only as valuable as the decision it changes.
 - **Executing via an actor is a new skill.** The running theme: solo contributors have never needed to think about the "why" — they had a task, they controlled the domain. Working through agents requires articulating objectives, guardrails, and what good looks like. That demands humility and self-reflection most technical work has never required.
 - **Self-knowledge, not superiority.** When comparing agent workflows to human workflows, frame the insight as what the process reveals about *your own* thinking — not why agents are better than people.
 
+### LinkedIn post voice (distinct from article voice)
+LinkedIn posts are more casual than articles. Same core philosophy — let the work speak for itself, never claim superiority, frame as personal experience — but the delivery is noticeably different:
+- **Conversational, not editorial.** Write like you're telling a colleague about something that happened today, not writing for a publication.
+- **Pop culture references welcome.** Rick and Morty Meseeks, etc. Signals "real person" and lands with the technical audience.
+- **Self-deprecating humor about the tools.** "Let's see how it fails" energy. The system is impressive but imperfect, and that honesty is the hook.
+- **No article links unless strategically withheld.** Keeping people in the LinkedIn feed drives engagement. Drop the link in a comment after traction, or leave it out entirely — the profile has the site URL.
+- **Shorter, punchier, more fragmented.** Bold labels, one-line paragraphs, numbered progressions. LinkedIn readers skim aggressively.
+
 ### Publishing cadence
 - **Publish day is Tuesday.** All new articles get a Tuesday date regardless of when they're actually written or pushed.
 
