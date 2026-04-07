@@ -1,12 +1,17 @@
 # LinkedIn Post: Governance / Challenger Agent
 
 **Date posted:** 2026-03-27
-**Engagement tracking:** [fill in after 48hrs]
-- Impressions:
-- Reactions:
-- Comments:
-- Reposts:
-- Link clicks:
+**Engagement tracking:** (as of 1w, 2026-04-06)
+- Impressions: 1,286
+- Members reached: 776
+- Profile viewers: 12
+- Followers gained: 3
+- Reactions: 14
+- Comments: 5
+- Reposts: 0
+- Saves: 3
+- Sends: 1
+- **Top demographics:** 36% 10,001+ employees | 32% Senior | 25% Financial Services | 14% NYC metro | 3% Huntington | 3% Software Engineer
 
 **Link included:** https://weswest.ai/writing/policy-enforcement-agentic-workflows/
 
