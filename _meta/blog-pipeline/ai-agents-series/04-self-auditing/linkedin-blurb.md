@@ -13,7 +13,7 @@
 - Sends:
 - Link clicks:
 
-**Link included:** https://weswest.ai/writing/self-auditing-agent/
+**Link included:** https://weswest.ai/writing/self-auditing-system/
 
 ---
 
@@ -21,4 +21,4 @@ I run a nearly autonomous team of AI coders. One's job is to criticize the other
 
 I wrote up how: "One Agent's Entire Job Is Auditing the Other Seven" — fourth in the series on building parallel agent development systems.
 
-https://weswest.ai/writing/self-auditing-agent/
+https://weswest.ai/writing/self-auditing-system/
