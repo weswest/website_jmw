@@ -1,0 +1,820 @@
+/* ===================================================================
+   FTP Interactive Explainer — Scrollytelling
+   ===================================================================
+   Snow Fall-style scroll-driven story. Pinned scene graphics; step
+   cards scroll past; scroll position drives time / n / tenor inside
+   the active beat (see scroller.js + scene modules).
+
+   Typography: site display + body fonts.
+   Palette: asset-red, liability-blue, spread-gold — validated for CVD
+   separation, chroma, and contrast on the paper surface.
+   =================================================================== */
+
+:root {
+  --ftp-asset: #b5544a;
+  --ftp-asset-soft: #e2bcb5;
+  --ftp-liability: #1d7fb0;
+  --ftp-liability-soft: #b8cdd5;
+  --ftp-spread: #9c742a;
+  --ftp-spread-text: #7d5c21; /* deeper step for small text */
+  --ftp-spread-soft: #ead7ad;
+  --ftp-income: #00897b; /* money in — validated vs asset red (deutan ΔE 8.2) */
+  --ftp-rule: #2c2620;
+  --ftp-rule-soft: #c9c2b6;
+  --ftp-grid: #e7e2d8;
+  --ftp-paper: #f5f2ec;
+  --ftp-paper-2: #f9f7f3;
+  --ftp-paper-3: #fcfaf7;
+  --ftp-ink: #1a1a1a;
+  --ftp-dim: rgba(28, 26, 22, 0.52);
+  --ftp-dimmer: rgba(28, 26, 22, 0.15);
+
+  --ftp-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ftp-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ftp-fast: 200ms;
+  --ftp-mid: 400ms;
+  --ftp-slow: 600ms;
+
+  --slide-bg: #f8f6f2;
+  --story-pad: clamp(1rem, 3vw, 3rem);
+  --sticky-top: clamp(1rem, 4vh, 2.5rem);
+  --card-lock: 12vh; /* where step cards pin; scroller.js reads this via computed style */
+}
+
+/* ===== Body overrides ===== */
+body:has(.ftp) .floating-sidebar { display: none; }
+body:has(.ftp) .site-main {
+  margin-left: 0; width: 100%; max-width: none; padding: 0;
+}
+body:has(.ftp) .site-nav { padding-left: var(--story-pad); }
+body:has(.ftp) .site-footer { display: none; }
+
+.ftp {
+  font-family: var(--font-body);
+  color: var(--ftp-ink);
+  background: var(--ftp-paper);
+  font-feature-settings: "kern" 1, "liga" 1;
+  line-height: 1.6;
+}
+
+/* ===== Story chrome ===== */
+.story__draft {
+  background: var(--ftp-spread-soft);
+  color: var(--ftp-ink);
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid var(--ftp-rule-soft);
+}
+
+.story__progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 3px; z-index: 60; pointer-events: none;
+}
+
+.story__progress i {
+  display: block; height: 100%;
+  background: var(--ftp-spread);
+  transform: scaleX(0); transform-origin: left center;
+}
+
+.story__chapter {
+  position: fixed; bottom: 0.9rem; left: 1.1rem;
+  font-family: var(--font-display);
+  font-style: italic; font-size: 0.85rem;
+  color: var(--ftp-dim);
+  background: color-mix(in srgb, var(--ftp-paper) 82%, transparent);
+  padding: 0.2rem 0.6rem; border-radius: 999px;
+  opacity: 0; transition: opacity var(--ftp-mid) var(--ftp-ease);
+  pointer-events: none; z-index: 55;
+}
+
+.story__chapter.is-visible { opacity: 1; }
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 92vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 4rem var(--story-pad) 3rem;
+  gap: 1.1rem;
+}
+
+.hero__kicker {
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ftp-spread-text);
+  margin: 0;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.7rem, 7.5vw, 4.8rem);
+  line-height: 1.05; letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hero__dek {
+  font-size: clamp(1.02rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ftp-ink);
+  max-width: 37rem; margin: 0;
+}
+
+.hero__byline {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.95rem; color: var(--ftp-dim); margin: 0;
+}
+
+.hero__cue {
+  margin: 2.5rem 0 0;
+  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ftp-dim);
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+}
+
+.hero__cue span { font-size: 1.1rem; animation: cueBob 1.8s ease-in-out infinite; }
+
+@keyframes cueBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ===== Prose interludes ===== */
+.prose {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: clamp(4rem, 10vh, 7rem) 1.2rem;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2; letter-spacing: -0.01em;
+  margin: 0 0 1.2rem;
+}
+
+.prose p { font-size: 1.02rem; line-height: 1.7; margin: 0 0 1.1rem; }
+.prose p:last-child { margin-bottom: 0; }
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.18rem; line-height: 1.3;
+  margin: 1.9rem 0 0.55rem;
+}
+
+.prose__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1.6rem 0;
+}
+
+.prose__card {
+  background: var(--ftp-paper-3);
+  border: 1px solid rgba(44, 38, 32, 0.1);
+  border-top: 3px solid var(--ftp-spread);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+
+.prose__card h3 {
+  font-family: var(--font-display);
+  font-size: 0.98rem; font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.prose__card p { font-size: 0.83rem; line-height: 1.55; color: var(--ftp-dim); margin: 0; }
+
+.prose--colophon { text-align: center; padding-bottom: 8rem; }
+.prose--colophon p { font-size: 0.92rem; color: var(--ftp-dim); }
+.prose--colophon a { color: var(--ftp-spread-text); }
+
+/* ===== Scenes — shared ===== */
+.scene { position: relative; }
+
+.scene__viz {
+  background: var(--slide-bg);
+  border: 1px solid rgba(44, 38, 32, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(44, 38, 32, 0.05), 0 6px 22px rgba(44, 38, 32, 0.05);
+  padding: 1.1rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.scene__viz svg { display: block; width: 100%; height: 100%; }
+
+/* --- steps & cards --- */
+.step {
+  min-height: 90vh;
+  display: flex; align-items: center;
+}
+
+.step--long { min-height: 150vh; }
+.step--xlong { min-height: 230vh; }
+
+.step__card {
+  background: color-mix(in srgb, var(--ftp-paper-3) 94%, transparent);
+  border: 1px solid rgba(44, 38, 32, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(44, 38, 32, 0.08);
+  padding: 1.15rem 1.35rem;
+  max-width: 26rem;
+  opacity: 0.45;
+  transform: translateY(6px);
+  transition: opacity var(--ftp-mid) var(--ftp-ease), transform var(--ftp-mid) var(--ftp-ease);
+}
+
+.step.is-active .step__card { opacity: 1; transform: translateY(0); }
+
+.step__card h3 {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.15rem; line-height: 1.25;
+  margin: 0 0 0.5rem;
+}
+
+.step__card p { font-size: 0.92rem; line-height: 1.6; margin: 0; }
+.step__card p + p { margin-top: 0.7rem; }
+
+.step__kicker {
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ftp-spread-text);
+  margin: 0 0 0.55rem;
+}
+
+/* --- side-by-side scenes --- */
+.scene--side {
+  display: grid;
+  grid-template-columns: minmax(19rem, 28rem) minmax(0, 1fr);
+  gap: clamp(1.2rem, 3vw, 3rem);
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0 var(--story-pad);
+}
+
+.scene--side .scene__sticky {
+  grid-column: 2; grid-row: 1;
+  position: sticky; top: var(--sticky-top);
+  height: calc(100vh - var(--sticky-top) * 2);
+  align-self: start;
+  display: flex; align-items: center;
+  min-width: 0;
+}
+
+.scene--side .scene__viz {
+  width: 100%;
+  height: min(88vh, 52rem);
+  display: flex; flex-direction: column;
+}
+
+/* Discrete story beats: the card rides up with the scroll, pins at
+   --card-lock, and only THEN does beatT advance (scroller.js reads the
+   card's computed sticky top). Cards therefore sit at the top of their
+   step, not centered in it. */
+.scene--side .step { align-items: flex-start; }
+.scene--side .step__card {
+  position: sticky;
+  top: var(--card-lock);
+}
+
+.scene--side .scene__steps {
+  grid-column: 1; grid-row: 1;
+  padding: 8vh 0 16vh;
+}
+
+/* --- full-bleed overlay scenes (the timber company) --- */
+.scene--overlay .scene__sticky {
+  position: sticky; top: 0;
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(0.5rem, 2vh, 2rem) var(--story-pad);
+}
+
+.scene--overlay .scene__viz {
+  width: min(96vw, 74rem);
+  height: min(90vh, 46rem);
+  padding: 0.6rem;
+}
+
+.scene--overlay .scene__steps {
+  position: relative; z-index: 5;
+  margin-top: -100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding-bottom: 12vh;
+}
+
+.scene--overlay .step {
+  width: 100%;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.scene--overlay .step__card {
+  max-width: 32rem;
+  text-align: center;
+  background: color-mix(in srgb, var(--ftp-paper-3) 90%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.scene--overlay .step__card p { font-size: 0.98rem; }
+
+/* ===== Mill scene (illustration) ===== */
+.mill { width: 100%; height: 100%; position: relative; }
+.mill__svg { width: 100%; height: 100%; }
+
+.mill .t-timber, .mill .t-bank { transition: opacity var(--ftp-slow) var(--ftp-ease); }
+.mill--timber .t-bank { opacity: 0; }
+.mill--bank .t-timber { opacity: 0; }
+
+.mill__arm { transition: opacity var(--ftp-mid) var(--ftp-ease); }
+.mill__arm.is-dim { opacity: 0.34; }
+
+.mill-banner {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 23px; letter-spacing: 0.1em; fill: var(--ftp-ink);
+}
+
+.mill-banner-sub {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 13.5px; fill: var(--ftp-dim);
+}
+
+.mill-lbl {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 18px; fill: var(--ftp-ink);
+}
+
+.mill-lbl-sub {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 13px; fill: var(--ftp-dim);
+}
+
+.mill-tag-text {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: 19px; fill: var(--ftp-ink);
+  transition: fill var(--ftp-fast);
+}
+
+.mill-tag-text.is-long { font-size: 13.5px; }
+.mill-tag-text.is-gold { fill: var(--ftp-spread-text); }
+
+.mill-coin { font-family: var(--font-body); font-weight: 700; font-size: 13px; fill: var(--ftp-spread-text); }
+.mill-chip { font-family: var(--font-body); font-weight: 600; font-size: 12px; fill: var(--ftp-ink); }
+
+.mill__cards { position: absolute; inset: 0; pointer-events: none; }
+
+.pnl {
+  position: absolute;
+  width: clamp(13rem, 22vw, 16rem);
+  background: var(--ftp-paper-3);
+  border: 1.5px solid var(--ftp-rule);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(44, 38, 32, 0.14);
+  padding: 0.75rem 0.95rem;
+  font-size: 0.8rem;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity var(--ftp-mid) var(--ftp-ease), transform var(--ftp-mid) var(--ftp-ease);
+}
+
+.pnl.is-visible { opacity: 1; transform: translateY(0); }
+
+.pnl--consol { left: 50%; top: 20%; margin-left: calc(clamp(13rem, 22vw, 16rem) / -2); }
+.pnl--mill { left: 4%; top: 9%; }
+.pnl--builder { right: 4%; top: 9%; }
+
+.pnl__title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 0.88rem; margin-bottom: 0.35rem;
+}
+
+.pnl__row {
+  display: flex; justify-content: space-between; gap: 0.8rem;
+  padding: 0.14rem 0;
+  font-feature-settings: "tnum" 1;
+}
+
+.pnl__row span { color: var(--ftp-dim); }
+.pnl__row b { font-weight: 600; }
+
+.pnl__row--result {
+  border-top: 1.5px solid var(--ftp-rule);
+  margin-top: 0.25rem; padding-top: 0.3rem;
+}
+
+.pnl__row--result b { font-size: 0.92rem; }
+.pnl__row--result.is-neg b { color: var(--ftp-asset); }
+.pnl__row--result.is-pos b { color: var(--ftp-spread-text); }
+
+.pnl__note {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.82rem; color: var(--ftp-dim);
+  margin-top: 0.3rem;
+}
+
+.pnl__note--solo { margin-top: 0; line-height: 1.5; }
+
+/* ===== Loan scene (the workbench) ===== */
+.loan { display: flex; flex-direction: column; gap: 0.35rem; height: 100%; min-height: 0; }
+
+.loan__panel-title {
+  font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--ftp-dim);
+}
+
+/* Each panel carries its own legend: balances key product identity,
+   income keys money direction. */
+.loan__panel-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin-top: 0.15rem; min-height: 1.15rem;
+}
+.loan__panel-head .ftp-viz__legend { min-height: 0; justify-content: flex-end; }
+
+.loan__plot { flex: 1 1 0; min-height: 0; position: relative; }
+.loan__plot--bal { flex-grow: 1.35; }
+
+.loan__readout {
+  border-top: 1px solid rgba(44, 38, 32, 0.1);
+  padding-top: 0.5rem;
+  min-height: 3.4rem;
+  font-feature-settings: "tnum" 1;
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+
+.loan__month { font-size: 0.92rem; font-weight: 700; }
+.loan__month em { font-style: normal; font-weight: 500; color: var(--ftp-dim); font-size: 0.8rem; }
+
+.loan__cells { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; }
+
+.loan__cell {
+  font-size: 0.8rem; color: var(--ftp-dim);
+  padding-left: 0.55rem;
+  border-left: 3px solid var(--ftp-rule-soft);
+  display: inline-flex; gap: 0.35rem; align-items: baseline; flex-wrap: wrap;
+}
+
+.loan__cell b { color: var(--ftp-ink); font-weight: 600; }
+.loan__cell i { font-style: normal; }
+.loan__cell--asset { border-left-color: var(--ftp-asset); }
+.loan__cell--fund { border-left-color: var(--ftp-liability); }
+.loan__cell--nii { border-left-color: var(--ftp-spread); }
+.loan__cell--nii b { color: var(--ftp-spread-text); }
+.loan__cell--neg { border-left-color: var(--ftp-asset); }
+.loan__cell--neg b { color: var(--ftp-asset); }
+.loan__cell--sum { border-left-color: var(--ftp-spread); }
+
+.loan__cells--summary { padding: 0.25rem 0; }
+
+/* Expandable caveat under the readout — a quiet one-liner that opens
+   into the list of simplifications the scenario leans on. */
+.loan__foot, .step__foot {
+  font-size: 0.74rem; color: var(--ftp-dim);
+  margin-top: 0.15rem;
+}
+.loan__foot summary, .step__foot summary {
+  cursor: pointer; list-style: none; user-select: none;
+  opacity: 0.85;
+}
+.loan__foot summary::before, .step__foot summary::before { content: '▸ '; font-size: 0.65rem; }
+.loan__foot[open] summary::before, .step__foot[open] summary::before { content: '▾ '; }
+.loan__foot summary::-webkit-details-marker, .step__foot summary::-webkit-details-marker { display: none; }
+.loan__foot summary u, .step__foot summary u {
+  text-decoration: underline dotted; text-underline-offset: 2px;
+}
+.loan__foot p, .step__foot p {
+  margin: 0.3rem 0 0; max-width: 62ch; line-height: 1.5;
+}
+
+/* ===== Deposits / beta scenes ===== */
+.deposits, .beta, .curve { display: flex; flex-direction: column; gap: 0.4rem; height: 100%; min-height: 0; }
+
+.deposits__counter {
+  min-height: 1.3rem;
+  text-align: right;
+  font-size: 0.85rem; color: var(--ftp-dim);
+  font-feature-settings: "tnum" 1;
+}
+
+.deposits__counter b { color: var(--ftp-ink); font-size: 1.05rem; }
+
+.deposits__caption {
+  min-height: 1.1rem;
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.82rem; color: var(--ftp-dim);
+}
+
+.deposits__plot.is-in, .beta__plot.is-in { animation: plotIn 350ms var(--ftp-ease-out); }
+
+@keyframes plotIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.curve__readout { min-height: 1.4rem; }
+
+/* ===== Ledger scene ===== */
+.ledger {
+  height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 1.1rem;
+  padding: 0.4rem 0.2rem;
+}
+
+/* Future stages are fully hidden (not ghosted) so unrevealed rows can't
+   be half-read before their beat. visibility keeps layout stable. */
+.ledger [data-s] { opacity: 0; visibility: hidden; transition: opacity var(--ftp-slow) var(--ftp-ease), visibility 0s var(--ftp-slow); }
+.ledger [data-s].is-on { opacity: 1; visibility: visible; transition: opacity var(--ftp-slow) var(--ftp-ease); }
+
+.ledger__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2.5vw, 2.2rem);
+}
+
+.ledger__head {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; margin-bottom: 0.5rem;
+}
+
+.ledger__head em { font-style: italic; font-weight: 400; color: var(--ftp-dim); font-size: 0.85rem; }
+
+.lrow {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 10rem) 1fr 3.6rem;
+  align-items: center; gap: 0.6rem;
+  padding: 0.28rem 0;
+  font-size: 0.8rem;
+  font-feature-settings: "tnum" 1;
+}
+
+.lrow__label { color: var(--ftp-dim); }
+
+.lrow__bar {
+  height: 14px;
+  background: rgba(44, 38, 32, 0.05);
+  border-radius: 4px;
+  display: flex; gap: 1px;
+  overflow: hidden;
+}
+
+.lrow__bar i { display: block; height: 100%; border-radius: 3px; transition: width var(--ftp-slow) var(--ftp-ease); }
+
+.lrow__val { text-align: right; font-weight: 600; }
+
+.lrow--result { border-top: 1.5px solid var(--ftp-rule); margin-top: 0.2rem; padding-top: 0.42rem; }
+.lrow--result .lrow__label { color: var(--ftp-ink); font-weight: 600; }
+.lrow--final .lrow__val { color: var(--ftp-spread-text); font-size: 0.92rem; }
+
+.ledger__options {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.ledger__opt-label { color: var(--ftp-dim); font-style: italic; font-family: var(--font-display); }
+
+.ledger__chip {
+  border: 1px solid rgba(44, 38, 32, 0.16);
+  background: var(--ftp-paper-3);
+  border-radius: 999px;
+  padding: 0.18rem 0.7rem;
+  font-feature-settings: "tnum" 1;
+}
+
+.ledger__chip b { color: var(--ftp-spread-text); }
+
+.ledger__teams {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
+  border-top: 2px solid var(--ftp-rule);
+  padding-top: 0.9rem;
+}
+
+.ledger__team { text-align: center; display: flex; flex-direction: column; gap: 0.1rem; }
+.ledger__team em { font-family: var(--font-display); font-style: italic; font-size: 0.88rem; color: var(--ftp-dim); }
+.ledger__team b { font-size: 1.15rem; font-weight: 700; color: var(--ftp-spread-text); font-feature-settings: "tnum" 1; }
+.ledger__team i { font-style: normal; font-size: 0.72rem; color: var(--ftp-dim); }
+
+/* ===== Chart shared bits ===== */
+.ftp-viz__legend {
+  display: flex; flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  font-size: 0.78rem;
+  color: var(--ftp-ink);
+  min-height: 1.2rem;
+}
+
+.ftp-viz__key { display: inline-flex; align-items: center; gap: 0.45rem; }
+.ftp-viz__key i { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+.ftp-readout {
+  display: flex; gap: 1.1rem; align-items: baseline; flex-wrap: wrap;
+  font-size: 0.8rem; color: var(--ftp-dim);
+  font-feature-settings: "tnum" 1;
+}
+
+.ftp-readout b { color: var(--ftp-ink); font-weight: 700; font-size: 0.9rem; }
+.ftp-readout__total b { color: var(--ftp-spread-text); }
+
+.ftp-axis text {
+  font-family: var(--font-body);
+  font-feature-settings: "tnum" 1;
+  font-size: 10.5px;
+  fill: var(--ftp-dim);
+}
+
+.ftp-axis path.domain { display: none; }
+
+.ftp-lbl { font-family: var(--font-body); font-feature-settings: "tnum" 1; font-size: 11.5px; font-weight: 600; }
+.ftp-lbl-sm { font-family: var(--font-body); font-feature-settings: "tnum" 1; font-size: 10px; font-weight: 600; }
+
+.ftp-annot {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  fill: var(--ftp-ink);
+  opacity: 0.8;
+}
+
+/* ===== Glossary ===== */
+dfn[data-term] {
+  font-style: normal;
+  border-bottom: 1px dotted var(--ftp-spread);
+  cursor: pointer;
+  color: var(--ftp-ink);
+  transition: color var(--ftp-fast);
+}
+
+dfn[data-term]:hover { color: var(--ftp-spread); }
+
+.glossary-popover {
+  position: absolute;
+  background: var(--ftp-paper-2);
+  border: 1px solid var(--ftp-spread);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  max-width: 22rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  box-shadow: 0 8px 24px rgba(28, 26, 22, 0.2);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--ftp-fast), transform var(--ftp-fast);
+  pointer-events: none;
+}
+
+.glossary-popover.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+.glossary-popover__term {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ftp-spread);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.glossary-popover__close {
+  position: absolute; top: 0.4rem; right: 0.5rem;
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; color: var(--ftp-dim); padding: 0.2rem 0.4rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 920px) {
+  :root { --card-lock: 57vh; } /* below the 54vh sticky viz */
+
+  .scene--side { display: block; padding: 0 0.8rem; }
+
+  .scene--side .scene__sticky {
+    position: sticky; top: 0; z-index: 10;
+    height: 54vh;
+    background: var(--ftp-paper);
+    padding: 0.5rem 0;
+    align-items: stretch;
+  }
+
+  .scene--side .scene__viz { height: 100%; padding: 0.8rem 0.9rem; }
+
+  .scene--side .scene__steps { padding: 3vh 0 10vh; }
+
+  .step { min-height: 75vh; justify-content: center; }
+  .step--long { min-height: 130vh; }
+  .step--xlong { min-height: 190vh; }
+  .step__card { max-width: 34rem; }
+
+  .prose__cards { grid-template-columns: 1fr; }
+  .ledger__grid { grid-template-columns: 1fr; }
+  .pnl { width: clamp(11rem, 38vw, 14rem); font-size: 0.72rem; }
+  .story__chapter { display: none; }
+  .loan__cells { gap: 0.25rem 0.8rem; }
+  .loan__cell { font-size: 0.72rem; }
+
+  /* Overlay scenes: centered layout hides the letterboxed drawing behind
+     the cards on a phone. Pin the drawing high at its true aspect ratio
+     and let the P&L cards flow beneath it instead of on top of it. */
+  .scene--overlay .scene__sticky { align-items: flex-start; }
+  .scene--overlay .scene__viz { width: 100%; height: auto; margin-top: 5vh; }
+  .mill { height: auto; display: flex; flex-direction: column; gap: 0.6rem; }
+  .mill__svg { width: 100%; height: auto; aspect-ratio: 1000 / 560; }
+  .mill__cards {
+    position: static; display: flex; flex-wrap: wrap;
+    gap: 0.5rem; justify-content: center;
+  }
+  .pnl { position: static; margin: 0; }
+  .pnl--consol { margin-left: 0; }
+  .pnl:not(.is-visible) { display: none; }
+  .scene--overlay .step { align-items: flex-end; padding-bottom: 4vh; }
+}
+
+/* ---- option scene: the rate slider + option-value meter ------------- */
+.option { display: flex; flex-direction: column; gap: 0.5rem; height: 100%; }
+.option__plot { flex: 1; min-height: 0; }
+
+.option__controls {
+  border: 1px solid var(--ftp-rule-soft);
+  border-radius: 10px;
+  background: var(--ftp-paper-3, #fcfaf7);
+  padding: 0.55rem 0.8rem 0.45rem;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.option__row { display: flex; align-items: center; gap: 0.7rem; }
+.option__lbl {
+  flex: 0 0 12.5rem;
+  font-family: var(--font-display); font-style: italic;
+  font-size: 0.8rem; color: var(--ftp-dim);
+}
+.option__rate, .option__meter-val {
+  flex: 0 0 5.2rem; text-align: right;
+  font-weight: 700; font-size: 0.9rem;
+  font-feature-settings: "tnum" 1; color: var(--ftp-ink);
+}
+
+.option__slider {
+  flex: 1; appearance: none; height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--ftp-asset), var(--ftp-grid) 50%, var(--ftp-liability));
+  outline-offset: 4px; cursor: ew-resize;
+}
+.option__slider::-webkit-slider-thumb {
+  appearance: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ftp-paper-2); border: 2.5px solid var(--ftp-ink);
+  box-shadow: 0 1px 4px rgba(28, 26, 22, 0.25);
+}
+.option__slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ftp-paper-2); border: 2.5px solid var(--ftp-ink);
+  box-shadow: 0 1px 4px rgba(28, 26, 22, 0.25);
+}
+
+.option__meter {
+  flex: 1; height: 12px; border-radius: 6px;
+  background: var(--ftp-grid); overflow: hidden;
+}
+.option__meter i {
+  display: block; height: 100%; border-radius: 6px;
+  background: var(--ftp-spread);
+  transition: width 380ms var(--ftp-ease);
+}
+.option__row--meter.is-hot .option__meter i { background: var(--ftp-spread); box-shadow: 0 0 0 1.5px var(--ftp-spread-text) inset; }
+.option__row--meter.is-hot .option__meter-val { color: var(--ftp-spread-text); }
+/* Hidden until the option-value beats activate the calculus */
+.option__row--meter { transition: opacity 500ms; }
+.option__row--meter.is-off { opacity: 0; pointer-events: none; }
+
+/* Funding-mix slider row (curve chapter) */
+.curve__mix {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.35rem 0.2rem;
+}
+.curve__mix-end {
+  font-size: 0.68rem; color: var(--ftp-dim); white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.curve__mix .option__slider {
+  flex: 1; min-width: 0;
+  background: linear-gradient(90deg, var(--ftp-asset), var(--ftp-grid) 50%, var(--ftp-income));
+}
+
+.option__hint {
+  font-size: 0.72rem; color: var(--ftp-dim); font-style: italic;
+  font-family: var(--font-display); text-align: center;
+}
+
+@media (max-width: 920px) {
+  .option__lbl { flex-basis: 8.5rem; font-size: 0.72rem; }
+  .option__rate, .option__meter-val { flex-basis: 4rem; font-size: 0.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}

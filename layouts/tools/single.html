@@ -1,0 +1,11 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/tools/ftp.css?v={{ now.Unix }}">
+<article class="ftp story" data-tool="ftp">
+  {{ if .Params.draftBanner }}<div class="story__draft">Draft — shared for review · numbers and copy still moving</div>{{ end }}
+  <div class="story__progress" aria-hidden="true"><i></i></div>
+  <div class="story__chapter" aria-hidden="true"></div>
+  {{ .Content }}
+</article>
+<script src="/js/vendor/d3.v7.min.js"></script>
+<script type="module" src="/js/tools/ftp/main.js?v={{ now.Unix }}"></script>
+{{ end }}
